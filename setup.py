@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_name = 'control'
+package_name = 'control_pkg'
 
 setup(
     name=package_name,
@@ -20,7 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'pub_node = control.pub_node:main'
+            'pub_node = control.pub_node:main',
             'sub_node = control.sub_node:main'
         ],
     },
