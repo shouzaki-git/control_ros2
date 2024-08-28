@@ -15,12 +15,13 @@ setup(
     zip_safe=True,
     maintainer='shouzaki',
     maintainer_email='sho.uzaki@icloud.com',
-    description='TODO: Package description',
-    license='TODO: License declaration',
+    description='A package for controlling',
+    license='BSD-3-Clause',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'control_node = control.control_node:main'
+            'pub_node = control.pub_node:main'
+            'sub_node = control.sub_node:main'
         ],
     },
 )

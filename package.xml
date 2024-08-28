@@ -3,11 +3,13 @@
 <package format="3">
   <name>control</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
+  <description>A package for controlling</description>
   <maintainer email="sho.uzaki@icloud.com">shouzaki</maintainer>
-  <license>TODO: License declaration</license>
+  <license>BSD-3-Clause</license>
 
-  <depend>rclpy</depend>
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>serial</exec_depend>
 
   <test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>
