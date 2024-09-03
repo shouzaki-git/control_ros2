@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_name = 'control_pkg'
+package_name = 'control'
 
 setup(
     name=package_name,
@@ -21,7 +21,8 @@ setup(
     entry_points={
         'console_scripts': [
             'pub_node = control.pub_node:main',
-            'sub_node = control.sub_node:main'
+            'sub_node = control.sub_node:main',
+            'control_node = control.control_node:main'
         ],
     },
 )
