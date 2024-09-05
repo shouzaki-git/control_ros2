@@ -1,40 +1,29 @@
 import rclpy
 from rclpy.node import Node
+from geometry_msgs.msg import Twist
 from sensor_msgs.msg import Joy
-from std_msgs.msg import String
 
-class DirectionPublisher(Node):
+class JoyControl(Node):
     def __init__(self):
-        super().__init__('direction_publisher')
-        self.publisher_ = self.create_publisher(String, 'direction', 10)
-        self.subscription = self.create_subscription(
-            Joy,
-            'joy',
-            self.joy_callback,
-            10)
-        self.subscription  # prevent unused variable warning
+        super().__init__('joy_control')
+        self.cmd_vel_pub = self.create_publisher(Twist, 'cmd_vel', 10)
+        self.joy_sub = self.create_subscription(Joy, 'joy', self.joy_callback, 10)
 
-    def joy_callback(self, msg):
-        if msg.buttons[0]:  # 例えば、Aボタンで前進
-            direction = 'w'
-        elif msg.buttons[1]:  # Bボタンで後退
-            direction = 's'
-        elif msg.buttons[2]:  # Xボタンで左
-            direction = 'a'
-        elif msg.buttons[3]:  # Yボタンで右
-            direction = 'd'
-        else:
-            direction = ''
+    def joy_callback(self, joy_msg):
+        twist = Twist()
 
-        if direction:
-            string_msg = String()
-            string_msg.data = direction
-            self.publisher_.publish(string_msg)
-            self.get_logger().info(f'Sent: {direction}')
+        # 左スティックで前進/後進
+        twist.linear.x = joy_msg.axes[1]  # 前進/後進の速度
+        # 右スティックで旋回
+        twist.angular.z = joy_msg.axes[0]  # 左右旋回の速度
+
+
+        self.cmd_vel_pub.publish(twist)
+        self.get_logger().info(f"Published Twist: linear.x={twist.linear.x}, angular.z={twist.angular.z}")
 
 def main(args=None):
     rclpy.init(args=args)
-    node = DirectionPublisher()
+    node = JoyControl()
     rclpy.spin(node)
     node.destroy_node()
     rclpy.shutdown()

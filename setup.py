@@ -22,7 +22,8 @@ setup(
         'console_scripts': [
             'pub_node = control.pub_node:main',
             'sub_node = control.sub_node:main',
-            'control_node = control.control_node:main'
+            'control_node = control.control_node:main',
+            'sub2_node = control.sub2_node:main'
         ],
     },
 )
