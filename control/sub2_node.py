@@ -13,7 +13,7 @@ class DirectionSubscriber(Node):
             10)
         
         # Arduinoとのシリアル通信の設定 (ポートとボーレートを適切に設定)
-        #self.ser = serial.Serial('/dev/ttyUSB0', 9600)  # ポート名を適切に設定
+        self.ser = serial.Serial('/dev/ttyACM0', 9600)# ポート名を適切に設定
         self.get_logger().info('Serial connection established.')
 
     def listener_callback(self, twist):
